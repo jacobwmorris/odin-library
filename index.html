@@ -32,14 +32,18 @@ th, td {
     text-align: left;
 }
 
+.error {
+    color: red;
+}
+
     </style>
 </head>
 <body>
     <button type="button" id="newButton">New Book</button>
-    <form action="#" method="post" class="no-display">
-        <label for="bookTitle">Title:<input type="text" name="title" id="bookTitle"></label>
-        <label for="bookAuthor">Author:<input type="text" name="author" id="bookAuthor"></label>
-        <label for="bookPages">Number of Pages:<input type="number" name="pages" id="bookPages"></label>
+    <form action="#" method="post" class="no-display" novalidate>
+        <label for="bookTitle">Title:<input type="text" name="title" id="bookTitle" required><span class="error"></span></label>
+        <label for="bookAuthor">Author:<input type="text" name="author" id="bookAuthor" required><span class="error"></span></label>
+        <label for="bookPages">Number of Pages:<input type="number" name="pages" id="bookPages" required><span class="error"></span></label>
         <label for="bookRead"><input type="checkbox" name="read" id="bookRead">Read</label>
         <button id="addBookButton">Add</button>
     </form>

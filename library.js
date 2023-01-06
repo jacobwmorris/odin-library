@@ -1,5 +1,11 @@
 const myLibrary = [];
 const tableBody = document.querySelector("tbody");
+const Form = {
+    title: document.getElementById("bookTitle"),
+    author: document.getElementById("bookAuthor"),
+    pages: document.getElementById("bookPages"),
+    read: document.getElementById("bookRead"),
+};
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -84,19 +90,79 @@ function displayBooks() {
     }
 }
 
+//Validation functions
+function setTitleError(event) {
+    console.log("changed");
+    const errorSpan = document.querySelector("#bookTitle + .error");
+
+    if (this.checkValidity()) {
+        errorSpan.textContent = "";
+        return;
+    }
+
+    if (this.validity.valueMissing) {
+        errorSpan.textContent = "A title is required";
+    }
+}
+
+function setAuthorError(event) {
+    const errorSpan = document.querySelector("#bookAuthor + .error");
+
+    if (this.checkValidity()) {
+        errorSpan.textContent = "";
+        return;
+    }
+
+    if (this.validity.valueMissing) {
+        errorSpan.textContent = "An author is required";
+    }
+}
+
+function setPagesError(event) {
+    const errorSpan = document.querySelector("#bookPages + .error");
+
+    if (this.checkValidity()) {
+        errorSpan.textContent = "";
+        return;
+    }
+
+    if (this.validity.valueMissing) {
+        errorSpan.textContent = "Page number is required";
+    }
+}
+
+Form.title.addEventListener("input", setTitleError);
+Form.title.addEventListener("focusout", setTitleError);
+
+Form.author.addEventListener("input", setAuthorError);
+Form.author.addEventListener("focusout", setAuthorError);
+
+Form.pages.addEventListener("input", setPagesError);
+Form.pages.addEventListener("focusout", setPagesError);
+
+function validate() {
+    return Form.title.validity.valid && Form.author.validity.valid && Form.pages.validity.valid;
+}
+
 //Handle add book form
 function bookForm(event) {
-    const title = document.getElementById("bookTitle").value;
-    const author = document.getElementById("bookAuthor").value;
-    const pages = document.getElementById("bookPages").value;
-    const read = document.getElementById("bookRead").checked;
+    event.preventDefault();
+    if (!validate()) {
+        setTitleError.call(Form.title);
+        setAuthorError.call(Form.author);
+        setPagesError.call(Form.pages);
+        return;
+    }
     
     const bookId = myLibrary.length;
-    addBookToLibrary(title, author, pages, read);
+    addBookToLibrary(Form.title.value, Form.author.value, Form.pages.value, Form.read.checked);
     tableBody.appendChild(makeTableRow(myLibrary[bookId], bookId));
 
+    Form.title.value = "";
+    Form.author.value = "";
+    Form.pages.value = "";
+    Form.read.checked = false;
     document.querySelector("form").classList.add("no-display");
-    event.preventDefault();
 }
 
 document.getElementById("newButton").addEventListener("click", event => {
