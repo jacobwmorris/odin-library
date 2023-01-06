@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <script src="./library.js" defer></script>
+    <style>
+
+form.no-display {
+    display: none;
+}
+
+label {
+    display: block;
+}
+
+label, button {
+    margin: 10px 0px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    
+    margin: 0;
+    padding: 5px 20px;
+    border: 1px solid gray;
+    text-align: left;
+}
+
+    </style>
+</head>
+<body>
+    <button type="button" id="newButton">New Book</button>
+    <form action="#" method="post" class="no-display">
+        <label for="bookTitle">Title:<input type="text" name="title" id="bookTitle"></label>
+        <label for="bookAuthor">Author:<input type="text" name="author" id="bookAuthor"></label>
+        <label for="bookPages">Number of Pages:<input type="number" name="pages" id="bookPages"></label>
+        <label for="bookRead"><input type="checkbox" name="read" id="bookRead">Read</label>
+        <button id="addBookButton">Add</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr><th>Title</th><th>Author</th><th>Pages</th><th>Read</th><th>Actions</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>  
+</body>
+</html>
